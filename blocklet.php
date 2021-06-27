@@ -3,7 +3,6 @@
 class Blocklet {
 	
 	public int $col_width = 80;
-	public string $typeset = '6';
 	public string $fill_rows = '******';
 	public string $ln_start = '/*';
 	public string $ln_end = '*/';
@@ -14,6 +13,7 @@ class Blocklet {
 	*/
 	public function create(
 		$text,
+		$typeset,
 		$HTMLoutput = false
 	){
 		/* Produces 6 lines of output */
@@ -57,10 +57,10 @@ class Blocklet {
 		){ 
 			$c = strtolower(substr($text, $i, 1));
 			if(!array_key_exists($c, $this->typesets[$this->typeset])){ $c = '-'; }
-			$rows[1] .= $this->typesets[$this->typeset][$c][0];
-			$rows[2] .= $this->typesets[$this->typeset][$c][1];
-			$rows[3] .= $this->typesets[$this->typeset][$c][2];
-			$rows[4] .= $this->typesets[$this->typeset][$c][3];
+			$rows[1] .= $this->typesets[$typeset][$c][0];
+			$rows[2] .= $this->typesets[$typeset][$c][1];
+			$rows[3] .= $this->typesets[$typeset][$c][2];
+			$rows[4] .= $this->typesets[$typeset][$c][3];
 		}
 		
 		/* Space after letters */
