@@ -16,3 +16,4 @@ echo "<pre>".$blocklet->create(
 )."</pre>";
 
 Use the above snippet to create a block header from the querystring sent on a request.
+The 'create' function takes two parameters; the first being the quote to print in the block header and the second defining whether the output should be HTML formatted.
