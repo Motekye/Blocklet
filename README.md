@@ -14,6 +14,7 @@ Includes several typefaces, all 4 lines tall. Typefaces vary in width from 3 to 
 ```
 
 Comes with the typefaces: 6, 5, 5l, 4l, 4xl, 3, 3l, 3xl
+Only letters, numbers, spaces and hyphens are allowed in the quote. All other characters are substituted with hyphens.
 
 ## using PHP version
 
