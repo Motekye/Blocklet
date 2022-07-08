@@ -20,9 +20,8 @@ Only letters, numbers, spaces and hyphens are allowed in the quote. All other ch
 
 ```
 <?php
-include "blocklet.php";
-$blocklet = new Blocklet;
-echo "<pre>".$blocklet->create(
+include "path/to/blocklet.php";
+echo "<pre>".Blocklet::create(
 	$_SERVER["QUERY_STRING"],
 	'6',
 	true

@@ -1,17 +1,31 @@
 <?php
 
+/****************************************************************************/
+/*** #####, ##      ####   ####_ ##   # ##     ###### ###### ****************/
+/*** ##___# ##     ##`  # ##   ` ##__#  ##     ##___    ##   ****************/
+/*** ##^^^x ##     ##, .# ##   _ ##^^#  ##     ##^^^    ##   ****************/
+/*** #####* ######  ####   ####` ##   # ###### ######   ##   ****************/
+/****************************************************************************
+ *
+ *	Create block header comments (^ like that one)
+ *
+*/
+
+
 class Blocklet {
 	
-	public int $col_width = 80;
-	public string $fill_rows = '******';
-	public string $ln_start = '/*';
-	public string $ln_end = '*/';
-	public int $left_pad = 2;
+	
+	public static int $col_width = 80;
+	public static string $fill_rows = '******';
+	public static string $ln_start = '/*';
+	public static string $ln_end = '*/';
+	public static int $left_pad = 2;
+	
 	
 	/*
-		Produce block letter comments...	
+	 *	Produce block letter comments...	
 	*/
-	public function create(
+	public static function create(
 		$text,
 		$typeset,
 		$HTMLoutput = false
@@ -20,34 +34,34 @@ class Blocklet {
 		$rows = array('','','','','','');
 		
 		/* Create top row of block header */
-		$rows[0] = $this->ln_start;
+		$rows[0] = self::$ln_start;
 		for(
-			$i = strlen($this->ln_start);
-			$i < $this->col_width - strlen($this->ln_end);
+			$i = strlen(self::$ln_start);
+			$i < self::$col_width - strlen(self::$ln_end);
 			$i++
 		){ 
 			$rows[0] .= substr(
-				$this->fill_rows,
-				$i % strlen($this->fill_rows),
+				self::$fill_rows,
+				$i % strlen(self::$fill_rows),
 				1
 			);
 		} 
-		$rows[0] .= $this->ln_end;
+		$rows[0] .= self::$ln_end;
 		
 		/* Clone top row for bottom row */
 		$rows[5] = $rows[0];
 		
 		/* Initialize rows */
-		$rows[1] = $this->ln_start;
-		$rows[2] = $this->ln_start;
-		$rows[3] = $this->ln_start;
-		$rows[4] = $this->ln_start;
+		$rows[1] = self::$ln_start;
+		$rows[2] = self::$ln_start;
+		$rows[3] = self::$ln_start;
+		$rows[4] = self::$ln_start;
 		
 		/* Left side padding */
-		$rows[1] .= substr($this->fill_rows, 0, $this->left_pad);
-		$rows[2] .= substr($this->fill_rows, 0, $this->left_pad);
-		$rows[3] .= substr($this->fill_rows, 0, $this->left_pad);
-		$rows[4] .= substr($this->fill_rows, 0, $this->left_pad);
+		$rows[1] .= substr(self::$fill_rows, 0, self::$left_pad);
+		$rows[2] .= substr(self::$fill_rows, 0, self::$left_pad);
+		$rows[3] .= substr(self::$fill_rows, 0, self::$left_pad);
+		$rows[4] .= substr(self::$fill_rows, 0, self::$left_pad);
 		
 		/* Compile rows one letter at a time */
 		for(
@@ -56,11 +70,11 @@ class Blocklet {
 			$i++
 		){ 
 			$c = strtolower(substr($text, $i, 1));
-			if(!array_key_exists($c, $this->typesets[$this->typeset])){ $c = '-'; }
-			$rows[1] .= $this->typesets[$typeset][$c][0];
-			$rows[2] .= $this->typesets[$typeset][$c][1];
-			$rows[3] .= $this->typesets[$typeset][$c][2];
-			$rows[4] .= $this->typesets[$typeset][$c][3];
+			if(!array_key_exists($c, self::$typesets[$typeset])){ $c = '-'; }
+			$rows[1] .= self::$typesets[$typeset][$c][0];
+			$rows[2] .= self::$typesets[$typeset][$c][1];
+			$rows[3] .= self::$typesets[$typeset][$c][2];
+			$rows[4] .= self::$typesets[$typeset][$c][3];
 		}
 		
 		/* Space after letters */
@@ -72,36 +86,36 @@ class Blocklet {
 		/* Fill remainder of rows */
 		for(
 			$i = strlen($rows[1]);
-			$i < $this->col_width - strlen($this->ln_end);
+			$i < self::$col_width - strlen(self::$ln_end);
 			$i++
 		){ 
 			$rows[1] .= substr(
-				$this->fill_rows,
-				$i % strlen($this->fill_rows),
+				self::$fill_rows,
+				$i % strlen(self::$fill_rows),
 				1
 			);
 			$rows[2] .= substr(
-				$this->fill_rows,
-				$i % strlen($this->fill_rows),
+				self::$fill_rows,
+				$i % strlen(self::$fill_rows),
 				1
 			);
 			$rows[3] .= substr(
-				$this->fill_rows,
-				$i % strlen($this->fill_rows),
+				self::$fill_rows,
+				$i % strlen(self::$fill_rows),
 				1
 			);
 			$rows[4] .= substr(
-				$this->fill_rows,
-				$i % strlen($this->fill_rows),
+				self::$fill_rows,
+				$i % strlen(self::$fill_rows),
 				1
 			);
 		}
 
 		/* Terminate rows */
-		$rows[1] .= $this->ln_end;
-		$rows[2] .= $this->ln_end;
-		$rows[3] .= $this->ln_end;
-		$rows[4] .= $this->ln_end;
+		$rows[1] .= self::$ln_end;
+		$rows[2] .= self::$ln_end;
+		$rows[3] .= self::$ln_end;
+		$rows[4] .= self::$ln_end;
 		
 		/* return HTML formatted or no */
 		if ($HTMLoutput) {
@@ -113,8 +127,11 @@ class Blocklet {
 		
 	}
 
-	/* Holding all known typesets */
-	public array $typesets = array(
+
+	/* 
+	 *	Holding all known typesets 
+	*/
+	public static array $typesets = array(
 	
 		'6' => array(
 
@@ -2283,9 +2300,6 @@ class Blocklet {
 		)
 	
 	);
+	
+	
 }
-
-
-
-
-
