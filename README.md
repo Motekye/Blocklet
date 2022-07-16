@@ -30,3 +30,21 @@ echo "<pre>".Blocklet::create(
 
 Use the above snippet to create a block header from the querystring sent on a request.
 The 'create' function takes three parameters; the first being the quote to print in the block header, the second being the name of the typeset to use as a string and the third defining whether the output should be HTML formatted.
+
+## using Javascript version
+
+```
+<script src="/path/to/blocklet.js"></script>
+<script>
+var pre = document.getElementById('my-pre');
+BLOCKLET.col_width = 80;
+pre.textContent = BLOCKLET.create(
+	'Caption',
+	'6'
+);
+</script>
+```
+
+Use the above code to paste the block header into a \<pre> element with the id "my-pre". Change the code as needed.
+
+The javascript version of this module doesn't take the HTMLescaped parameter, as assigning to the textContent of an element will do this for you automatically. Otherwise the parameters are the same as the PHP version.
